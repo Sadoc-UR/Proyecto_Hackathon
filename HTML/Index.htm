@@ -5,32 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Denuncias Ciudadanas</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/YOUR-FONTAWESOME-KIT.js" crossorigin="anonymous"></script>
 
     <style>
         body {
             margin: 0;
-            height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #a1caff, #1677d1); /* Fondo azul */
+            background: linear-gradient(135deg, #a1caff, #1677d1);
             color: white;
             font-family: 'Arial', sans-serif;
             text-align: center;
         }
 
-        /* Contenedor del menú con fondo claro */
         .menu-container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             width: 90%;
-            max-width: 400px;
+            max-width: 450px;
             color: #1677d1;
         }
 
-        /* Botones con colores pastel */
         .menu-item {
             font-size: 16px;
             border-radius: 25px;
@@ -48,19 +47,12 @@
             border: none;
         }
 
-        .menu-item:nth-child(1) { background-color: #FFD972; } /* Amarillo */
-        .menu-item:nth-child(2) { background-color: #A1E887; } /* Verde menta */
-        .menu-item:nth-child(3) { background-color: #82CFFD; } /* Azul suave */
-        .menu-item:nth-child(4) { background-color: #FF9AA2; } /* Coral */
-        .menu-item:nth-child(5) { background-color: #B39DDB; } /* Lavanda */
-        .menu-item:nth-child(6) { background-color: #FFAB73; } /* Naranja pastel */
-
         .menu-item:hover {
             transform: scale(1.05);
             filter: brightness(1.2);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Sombra al hacer hover */
         }
 
-        /* Modal (ahora es la pantalla de carga) */
         .modal {
             position: fixed;
             inset: 0;
@@ -89,7 +81,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        /* Spinner de carga */
         .spinner {
             width: 50px;
             height: 50px;
@@ -104,37 +95,79 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Estilos para los enlaces del navbar */
+        nav a:hover {
+            text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Efecto de sombra en hover */
+        }
+
     </style>
 </head>
 <body>
 
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-3 px-6 flex justify-between items-center">
+        <div class="text-blue-600 font-bold text-xl"><i class="fas fa-bullhorn"></i> Denuncias Ciudadanas</div>
+        <ul class="flex space-x-4">
+            <li><a href="#" class="hover:text-blue-500 transition-colors"><i class="fas fa-home"></i> Inicio</a></li>
+            <li><a href="#" class="hover:text-blue-500 transition-colors"><i class="fas fa-info-circle"></i> Sobre Nosotros</a></li>
+            <li><a href="#" class="hover:text-blue-500 transition-colors"><i class="fas fa-envelope"></i> Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección de bienvenida -->
+    <section class="mt-24 text-center px-6">
+        <h1 class="text-3xl font-bold"><i class="fas fa-exclamation-circle"></i> ¡Tu voz importa!</h1>
+        <p class="mt-2 text-lg">Denuncia cualquier problema en tu comunidad y ayudemos a mejorar nuestra ciudad.</p>
+        <a href="#" class="mt-4 inline-block bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transition-all hover:shadow-xl">
+            <i class="fas fa-pen"></i> Hacer una denuncia
+        </a>
+    </section>
+
     <!-- Contenedor del menú -->
-    <div class="menu-container">
-        <div class="flex justify-center mb-4">
-            <img src="../IMG/LogQRO-removebg-preview.png" alt="Logo Ciudad" class="w-60">
-        </div>
-
-        <h2 class="text-xl font-bold mb-4">📢 Denuncias Ciudadanas</h2>
-
-        <!-- Lista de categorías -->
-        <ul id="menu" class="space-y-3">
-            <li class="menu-item" data-category="transito">🚦 Tránsito y Vialidad</li>
-            <li class="menu-item" data-category="seguridad">🚔 Seguridad Ciudadana</li>
-            <li class="menu-item" data-category="medioambiente">🌿 Medio Ambiente</li>
-            <li class="menu-item" data-category="infraestructura">🏗️ Infraestructura Urbana</li>
-            <li class="menu-item" data-category="salud">🏥 Salud Pública</li>
-            <li class="menu-item" data-category="servicios">💡 Servicios Públicos</li>
+    <div class="menu-container mt-10">
+        <h2 class="text-2xl font-bold mb-4">🛠️ Categorías de Denuncia</h2>
+        <ul id="menu" class="space-y-4">
+            <li class="menu-item bg-yellow-400" data-category="transito">
+                <i class="fas fa-car-side"></i> Tránsito y Vialidad
+            </li>
+            <li class="menu-item bg-green-400" data-category="seguridad">
+                <i class="fas fa-user-shield"></i> Seguridad Ciudadana
+            </li>
+            <li class="menu-item bg-blue-400" data-category="medioambiente">
+                <i class="fas fa-tree"></i> Medio Ambiente
+            </li>
+            <li class="menu-item bg-red-400" data-category="infraestructura">
+                <i class="fas fa-tools"></i> Infraestructura Urbana
+            </li>
+            <li class="menu-item bg-purple-400" data-category="salud">
+                <i class="fas fa-clinic-medical"></i> Salud Pública
+            </li>
+            <li class="menu-item bg-orange-400" data-category="servicios">
+                <i class="fas fa-lightbulb"></i> Servicios Públicos
+            </li>
         </ul>
     </div>
 
     <!-- Modal emergente de carga -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <h3 id="modal-title" class="text-xl font-bold mb-4">Cargando...</h3>
+            <h3 id="modal-title" class="text-xl font-bold mb-4"><i class="fas fa-spinner fa-spin"></i> Cargando...</h3>
             <div class="spinner"></div>
             <p class="text-gray-300">Por favor, espera un momento.</p>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="w-full bg-gray-900 text-white py-6 mt-12 text-center">
+        <p>&copy; 2025 Denuncias Ciudadanas | Todos los derechos reservados.</p>
+        <div class="flex justify-center space-x-6 mt-3">
+            <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-facebook-f text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-twitter text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-instagram text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-linkedin-in text-xl"></i></a>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -143,11 +176,8 @@
 
             items.forEach(item => {
                 item.addEventListener("click", () => {
-                    // Mostrar el modal de carga
                     modal.classList.add("show");
-
-                    // Obtener la categoría y redirigir después de la simulación de carga
-                    const category = item.getAttribute("data-category");
+                    const category = item.getAttribute("data-category");        
 
                     setTimeout(() => {
                         window.location.href = category + ".html";
