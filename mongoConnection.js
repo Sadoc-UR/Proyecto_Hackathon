@@ -1,3 +1,16 @@
+/**
+ * This file establishes a connection to a MongoDB database using the MongoDB Node.js driver.
+ * 
+ * Usage:
+ * 1. Ensure the MongoDB package is installed: `npm install mongodb`.
+ * 2. Replace <db_password> in the `uri` variable with your actual database password.
+ * 3. Import and call the `connectToMongo` function to connect to the database.
+ * 
+ * Example:
+ * const connectToMongo = require('./mongoConnection');
+ * connectToMongo();
+ */
+
 // Ensure you have installed the MongoDB package by running: npm install mongodb
 const { MongoClient } = require('mongodb');
 
