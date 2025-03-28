@@ -1,0 +1,18 @@
+<form action="/submit-transito" method="post">
+    <label for="name">Nombre completo:</label>
+    <input type="text" id="name" name="name" required><br>
+    
+    <label for="date">Fecha y hora:</label>
+    <input type="datetime-local" id="date" name="date" required><br>
+    
+    <label for="incident">Descripción del incidente:</label>
+    <textarea id="incident" name="incident" required></textarea><br>
+    
+    <label for="vehicle">Tipo de vehículo involucrado:</label>
+    <input type="text" id="vehicle" name="vehicle"><br>
+    
+    <label for="witness">Testigos:</label>
+    <input type="text" id="witness" name="witness"><br>
+    
+    <button type="submit">Enviar</button>
+  </form>

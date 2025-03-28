@@ -1,0 +1,22 @@
+<form action="/submit-infraestructura" method="post">
+    <label for="name">Nombre completo:</label>
+    <input type="text" id="name" name="name" required><br>
+    
+    <label for="location">Ubicación:</label>
+    <input type="text" id="location" name="location" required><br>
+    
+    <label for="type">Tipo de infraestructura afectada:</label>
+    <input type="text" id="type" name="type"><br>
+    
+    <label for="description">Descripción del problema:</label>
+    <textarea id="description" name="description" required></textarea><br>
+    
+    <label for="priority">Prioridad:</label>
+    <select id="priority" name="priority">
+      <option value="alta">Alta</option>
+      <option value="media">Media</option>
+      <option value="baja">Baja</option>
+    </select><br>
+    
+    <button type="submit">Enviar</button>
+  </form>

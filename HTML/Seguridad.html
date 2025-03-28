@@ -1,0 +1,22 @@
+<form action="/submit-seguridad" method="post">
+    <label for="name">Nombre completo:</label>
+    <input type="text" id="name" name="name" required><br>
+    
+    <label for="location">Dirección:</label>
+    <input type="text" id="location" name="location" required><br>
+    
+    <label for="description">Descripción de la situación:</label>
+    <textarea id="description" name="description" required></textarea><br>
+    
+    <label for="evidence">Evidencia:</label>
+    <input type="file" id="evidence" name="evidence"><br>
+    
+    <label for="urgency">Nivel de urgencia:</label>
+    <select id="urgency" name="urgency">
+      <option value="alta">Alta</option>
+      <option value="media">Media</option>
+      <option value="baja">Baja</option>
+    </select><br>
+    
+    <button type="submit">Enviar</button>
+  </form>

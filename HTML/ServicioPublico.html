@@ -1,0 +1,21 @@
+<form action="/submit-serviciospublicos" method="post">
+    <label for="name">Nombre completo:</label>
+    <input type="text" id="name" name="name" required><br>
+    
+    <label for="location">Dirección afectada:</label>
+    <input type="text" id="location" name="location" required><br>
+    
+    <label for="type">Tipo de servicio público:</label>
+    <input type="text" id="type" name="type" required><br>
+    
+    <label for="description">Descripción del problema:</label>
+    <textarea id="description" name="description" required></textarea><br>
+    
+    <label for="frequency">Frecuencia del problema:</label>
+    <select id="frequency" name="frequency">
+      <option value="ocasional">Ocasional</option>
+      <option value="recurrente">Recurrente</option>
+    </select><br>
+    
+    <button type="submit">Enviar</button>
+  </form>
