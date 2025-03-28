@@ -1,6 +1,6 @@
-# Project Title
+# Reporte Ciudadano
 
-One Paragraph of project description goes here
+Este programa tiene un enfoque para un reporte ciudadano y se autocomplete con la ayuda de la IA este generara un formulario y lo mandara a una base de datos
 
 ## Getting Started
 
