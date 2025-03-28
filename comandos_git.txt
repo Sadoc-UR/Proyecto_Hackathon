@@ -1,0 +1,70 @@
+**Comandos Git Simplificados para Subir y Actualizar Cambios**
+
+----------------------------------------------------------------
+
+### Para SUBIR cambios al repositorio
+
+1. **Moverse a la carpeta del repositorio**
+   cd RUTA/DEL/REPOSITORIO
+
+2. **Ver el estado de los archivos**
+   Esto te muestra qué archivos han sido modificados o agregados.
+   
+   git status
+   
+3. **Agregar los archivos modificados**
+   Esto incluye todos los cambios para ser confirmados.
+   
+   git add .
+   
+
+4. **Confirmar los cambios con un mensaje**
+   Guardas los cambios con una descripción clara de lo que hiciste.
+   
+   git commit -m "Descripción del cambio"
+   
+
+5. **Obtener los últimos cambios de otros (evitar conflictos)**
+   Antes de subir, traes los últimos cambios del repositorio.
+   
+   git pull origin master --rebase
+   
+------Este paso se hace solamente la primera vez depues solamente es git push------------
+
+6. **Subir tus cambios al repositorio**
+   Finalmente, subes los cambios a GitHub.
+   
+   git push origin master
+   
+
+----------------------------------------------------------------
+
+### Para ACTUALIZAR tu repositorio con los cambios de otros
+
+1. **Ir a la carpeta del repositorio**
+   
+   cd RUTA/DEL/REPOSITORIO
+   
+
+2. **Obtener los cambios más recientes del repositorio remoto**
+   Esto trae los últimos cambios de otros usuarios.
+   
+   git pull origin master
+   
+
+----------------------------------------------------------------
+
+### Para DESCARGAR un archivo específico sin actualizar todo
+
+1. **Ver los cambios sin descargar**
+   Esto muestra qué archivos han sido modificados sin aplicarlos.
+   ```
+   git fetch origin
+   git status
+   ```
+
+2. **Descargar un archivo específico**
+   Si solo quieres un archivo específico, puedes traerlo sin afectar el resto.
+   ```
+   git checkout origin/master -- RUTA/DEL/ARCHIVO
+   ```
