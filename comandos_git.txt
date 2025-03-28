@@ -23,7 +23,7 @@
    
    git commit -m "Descripción del cambio"
    
-
+------Este es para evitar conflictos----
 5. **Obtener los últimos cambios de otros (evitar conflictos)**
    Antes de subir, traes los últimos cambios del repositorio.
    
