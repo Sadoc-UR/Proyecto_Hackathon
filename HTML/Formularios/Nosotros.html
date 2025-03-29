@@ -27,7 +27,7 @@
             border-radius: 12px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             width: 90%;
-            max-width: 600px;
+            max-width: 700px;
             color: #1677d1;
         }
 
@@ -67,46 +67,70 @@
             object-fit: cover;
         }
 
-        /* Navbar hover */
-        nav a:hover {
-            text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-        }
+      /* Nuevo footer con colores actualizados */
+  /* Footer con azul más fuerte */
+footer {
+    background: linear-gradient(135deg, #062a57, #0b3c75); /* Azul fuerte */
+    color: #fff; /* Texto en blanco puro */
+    padding: 20px 0;
+    margin-top: 20px;
+    text-align: center;
+}
+
+footer h4 {
+    color: #00aaff; /* Azul eléctrico para destacar */
+}
+
+footer p {
+    color: #cce7ff; /* Azul claro para buena visibilidad */
+}
+
+.footer-icons a {
+    color: #00aaff; /* Azul eléctrico */
+    transition: 0.3s;
+}
+
+.footer-icons a:hover {
+    color: #ffffff; /* Blanco con efecto de brillo */
+    text-shadow: 0px 0px 8px #00aaff;
+}
+
+.border-t {
+    border-color: #00aaff !important; /* Línea divisoria en azul eléctrico */
+}
+
+.footer-links a {
+    color: #cce7ff; /* Azul claro */
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #00aaff; /* Cambio a azul eléctrico */
+}
+
+
     </style>
 </head>
 <body>
 
+    <br>
+    <br>
+    br
     <!-- Navbar -->
     <nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-sky-400 to-blue-600 shadow-md py-3 px-6 flex justify-between items-center text-white">
         <div class="font-bold text-xl flex items-center">
-            <div>
-                <img src="../IMG/LogQRO-removebg-preview.png" alt="Logo" class="h-20 w-15 object-contain">
-            </div>
+            <img src="../IMG/LogQRO-removebg-preview.png" alt="Logo" class="h-20 w-15 object-contain">
             <span class="ml-20 text-lg">Sobre Nosotros</span>
         </div>
         <ul class="hidden md:flex space-x-6 items-center">
-            <li>
-                <a href="index.html" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
-                    <img src="../IMG/home.png" alt="Inicio" class="h-8 w-8"> <span>Inicio</span>
-                </a>
-            </li>
-            <li>
-                <a href="sobre_nosotros.html" class="inline-flex items-center px-4 py-2 gap-2 bg-yellow-400 text-blue-900 rounded-lg transition-all focus:outline-none">
-                    <img src="../IMG/group_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="Sobre Nosotros" class="h-8 w-8"> <span>Sobre Nosotros</span>
-                </a>
-            </li>
-            <li>
-                <a href="faq.html" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
-                    <img src="../IMG/help_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="FAQ" class="h-8 w-8"> <span>FAQ</span>
-                </a>
-            </li>
-            <li>
-                <a href="contacto.html" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
-                    <img src="../IMG/rename.png" alt="Contacto" class="h-8 w-8"> <span>Contacto</span>
-                </a>
-            </li>
+            <li><a href="index.html" class="hover:text-yellow-400">Inicio</a></li>
+            <li><a href="sobre_nosotros.html" class="text-yellow-400">Sobre Nosotros</a></li>
+            <li><a href="faq.html" class="hover:text-yellow-400">FAQ</a></li>
+            <li><a href="contacto.html" class="hover:text-yellow-400">Contacto</a></li>
         </ul>
     </nav>
 
+    <!-- Sección de bienvenida -->
     <section class="mt-24 text-center px-6">
         <h1 class="text-3xl font-bold"><i class="fas fa-users"></i> Quiénes Somos</h1>
         <p class="mt-2 text-lg">Somos un equipo comprometido en brindar una plataforma para que los ciudadanos puedan reportar problemas en su comunidad de manera eficiente y segura.</p>
@@ -134,15 +158,23 @@
                 <p class="font-bold mt-2">Juan Pérez</p>
                 <p>Desarrollador</p>
             </div>
+            <div class="team-member">
+                <img src="../IMG/person4.jpg" alt="Persona 4">
+                <p class="font-bold mt-2">Ana Martínez</p>
+                <p>Diseñadora</p>
+            </div>
+            <div class="team-member">
+                <img src="../IMG/person5.jpg" alt="Persona 5">
+                <p class="font-bold mt-2">Luis Gómez</p>
+                <p>Marketing</p>
+            </div>
         </div>
     </div>
 
-    <br>
-    
     <!-- Footer -->
-    <footer class="w-full bg-gradient-to-r from-sky-400 to-blue-600 text-white py-8 mt-12 text-center">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-wrap justify-center gap-8 mb-6">
+    <footer class="w-full bg-gradient-to-r from-sky-400 to-blue-600 text-gray-600 py-8 mt-12 text-center">
+        <div class="container mx-auto px-6  bg-gradient-to-r from-sky-400 to-blue-600">
+            <div class="flex  flex-wrap justify-center gap-8 mb-6">
                 <div>
                     <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-map-marker-alt"></i> Dirección</h4>
                     <p class="text-gray-300">Av. Ciudadana #123, Ciudad, País</p>
@@ -159,6 +191,16 @@
 
             <div class="border-t border-gray-600 pt-4">
                 <p class="text-gray-300">&copy; 2025 Denuncias Ciudadanas | Todos los derechos reservados.</p>
+                <div class="flex justify-center space-x-6 mt-3">
+                    <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-linkedin-in text-xl"></i></a>
+                </div>
+                <div class="mt-4">
+                    <a href="#" class="text-black hover:text-yellow-300 transition text-sm"><i class="fas fa-file-contract"></i> Términos y Condiciones</a> |
+                    <a href="#" class="text-black hover:text-yellow-300 transition text-sm"><i class="fas fa-user-shield"></i> Política de Privacidad</a>
+                </div>
             </div>
         </div>
     </footer>
