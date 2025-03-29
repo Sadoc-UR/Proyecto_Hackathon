@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros</title>
+    <link rel="icon" href="../IMG/LogoQ.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/YOUR-FONTAWESOME-KIT.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #a1caff, #2070bb);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+            color: #1677d1;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 16px;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .team-member {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 150px;
+            text-align: center;
+            color: #1677d1;
+        }
+
+        .team-member img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Navbar hover */
+        nav a:hover {
+            text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-sky-400 to-blue-600 shadow-md py-3 px-6 flex justify-between items-center text-white">
+        <div class="font-bold text-xl flex items-center">
+            <div>
+                <img src="../IMG/LogQRO-removebg-preview.png" alt="Logo" class="h-20 w-15 object-contain">
+            </div>
+            <span class="ml-20 text-lg">Sobre Nosotros</span>
+        </div>
+        <ul class="hidden md:flex space-x-6 items-center">
+            <li>
+                <a href="index.html" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                    <img src="../IMG/home.png" alt="Inicio" class="h-8 w-8"> <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="sobre_nosotros.html" class="inline-flex items-center px-4 py-2 gap-2 bg-yellow-400 text-blue-900 rounded-lg transition-all focus:outline-none">
+                    <img src="../IMG/group_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="Sobre Nosotros" class="h-8 w-8"> <span>Sobre Nosotros</span>
+                </a>
+            </li>
+            <li>
+                <a href="faq.html" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                    <img src="../IMG/help_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="FAQ" class="h-8 w-8"> <span>FAQ</span>
+                </a>
+            </li>
+            <li>
+                <a href="contacto.html" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                    <img src="../IMG/rename.png" alt="Contacto" class="h-8 w-8"> <span>Contacto</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="mt-24 text-center px-6">
+        <h1 class="text-3xl font-bold"><i class="fas fa-users"></i> Quiénes Somos</h1>
+        <p class="mt-2 text-lg">Somos un equipo comprometido en brindar una plataforma para que los ciudadanos puedan reportar problemas en su comunidad de manera eficiente y segura.</p>
+    </section>
+
+    <!-- Contenido de Sobre Nosotros -->
+    <div class="container mt-10">
+        <h2 class="text-2xl font-bold">Nuestra Misión</h2>
+        <p>Facilitar la comunicación entre los ciudadanos y las autoridades, promoviendo una sociedad más justa, segura y equitativa.</p>
+
+        <h2 class="text-2xl font-bold mt-6">Nuestro Equipo</h2>
+        <div class="team">
+            <div class="team-member">
+                <img src="../IMG/person1.jpg" alt="Persona 1">
+                <p class="font-bold mt-2">Carlos López</p>
+                <p>Fundador & CEO</p>
+            </div>
+            <div class="team-member">
+                <img src="../IMG/person2.jpg" alt="Persona 2">
+                <p class="font-bold mt-2">María García</p>
+                <p>Co-Fundadora</p>
+            </div>
+            <div class="team-member">
+                <img src="../IMG/person3.jpg" alt="Persona 3">
+                <p class="font-bold mt-2">Juan Pérez</p>
+                <p>Desarrollador</p>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    
+    <!-- Footer -->
+    <footer class="w-full bg-gradient-to-r from-sky-400 to-blue-600 text-white py-8 mt-12 text-center">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-8 mb-6">
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-map-marker-alt"></i> Dirección</h4>
+                    <p class="text-gray-300">Av. Ciudadana #123, Ciudad, País</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-envelope"></i> Contacto</h4>
+                    <p class="text-gray-300">soporte@denunciasciudadanas.com</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-phone"></i> Teléfono</h4>
+                    <p class="text-gray-300">+123 456 7890</p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-600 pt-4">
+                <p class="text-gray-300">&copy; 2025 Denuncias Ciudadanas | Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
