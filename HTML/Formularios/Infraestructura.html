@@ -177,7 +177,7 @@
         }
 
         .circle-menu {
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(to right, #1e88e5, #1565c0); /* Degradado de blue-600 a blue-800 */
             padding: 10px;
             border-radius: 0;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
@@ -190,7 +190,7 @@
 
         .circle-item {
             background: transparent;
-            color: #1677d1;
+            color: rgba(255, 255, 255, 0.95);
             font-weight: bold;
             font-size: 16px;
             text-transform: uppercase;
@@ -203,7 +203,7 @@
         }
 
         .circle-item:hover {
-            background-color: rgba(22, 119, 209, 0.2);
+            background-color: rgba(13, 56, 96, 0.2);
             transform: none;
             box-shadow: none;
         }
@@ -213,8 +213,22 @@
 
     <div class="circle-menu">
         <img src="../../IMG/LogQRO-removebg-preview.png" alt="Logo" class="circle-item" style="width: 110px; height: auto;">
-        <div class="circle-item">Inicio</div>
-        <div class="circle-item">Contacto</div>
+        <div class="circle-item" style="display: flex; align-items: center; gap: 5px;">
+            <img src="../../IMG/home.png" alt="Inicio" style="width: 20px; height: auto;">
+            <span>Inicio</span>
+        </div>
+        <div class="circle-item" style="display: flex; align-items: center; gap: 5px;">
+            <img src="../../IMG/group_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="Inicio" style="width: 20px; height: auto;">
+            <span>Sobre Nosotros</span>
+        </div>
+        <div class="circle-item" style="display: flex; align-items: center; gap: 5px;">
+            <img src="../../IMG/help_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="Inicio" style="width: 20px; height: auto;">
+            <span>FAQ</span>
+        </div>
+        <div class="circle-item" style="display: flex; align-items: center; gap: 5px;">
+            <img src="../../IMG/rename.png" alt="Inicio" style="width: 20px; height: auto;">
+            <span>Contacto</span>
+        </div>
     </div>
 
     <div class="menu-container">
