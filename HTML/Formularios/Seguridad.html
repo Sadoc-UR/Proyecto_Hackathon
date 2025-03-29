@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot Inteligente</title>
+    <link rel="icon" href="../../IMG/LogoQ.png">
+    <title>Chatbot de Seguridad</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
@@ -18,14 +19,44 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
-        /* 🔥 CONTENEDOR DEL CHAT */
+        /* Navbar */
+        .circle-menu {
+            background: linear-gradient(to right, #1e88e5, #1565c0);
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .circle-item {
+            background: transparent;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            padding: 10px 15px;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+
+        .circle-item:hover {
+            background-color: rgba(13, 56, 96, 0.2);
+        }
+
+        /* Chatbot */
         .chat-container {
             background: white;
             color: black;
-            width: 80%;
+            width: 90%;
             max-width: 600px;
             height: 80vh;
             display: flex;
@@ -95,97 +126,255 @@
             align-self: flex-start;
             text-align: left;
         }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            background: linear-gradient(to right, #1e88e5, #1565c0);
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+            margin-top: 20px;
+        }
+
+        footer a {
+            color: black;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: yellow;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- CONTENEDOR DEL CHAT EN PANTALLA COMPLETA -->
+        <!-- Navbar -->
+        <nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-sky-400 to-blue-600 shadow-md py-3 px-6 flex justify-between items-center text-white">
+            <div class="font-bold text-xl flex items-center">
+                <div class="">
+                    <img src="../../../IMG/LogQRO-removebg-preview.png" alt="Logo" class="h-20 w-15 object-contain">
+                </div>
+                <span class="ml-20 text-lg">Denuncias Ciudadanas</span>
+            </div>
+            <ul class="hidden md:flex space-x-6 items-center">
+                <li>
+                    <a href="/index.html" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                        <img src="../../../IMG/home.png" alt="Inicio" class="h-8 w-8"> <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Formularios/Nosotros.html" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                        <img src="../../../IMG/group_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" class="h-8 w-8"> <span>Sobre Nosotros</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Formularios/Preguntas.html" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                        <img src="../../../IMG/help_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="FAQ" class="h-8 w-8"> <span>FAQ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                        <img src="../../../IMG/rename.png" alt="Contacto" class="h-8 w-8"> <span>Contacto</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    <!-- Contenedor del Chat -->
     <div class="chat-container">
-        <div class="chat-header">Asistente Virtual</div>
+        <div class="chat-header">Asistente Virtual de Seguridad</div>
         <div class="chat-body" id="chat-body"></div>
         <div class="chat-footer">
             <input type="text" id="chat-input" placeholder="Escribe aquí..." onkeypress="handleKeyPress(event)">
             <button onclick="sendMessage()">Enviar</button>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
 
+    <!-- Footer -->
+    <footer class="w-full bg-gradient-to-r from-sky-400 to-blue-600 text-white py-8 mt-12 text-center">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-8 mb-6">
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-map-marker-alt"></i> Dirección</h4>
+                    <p class="text-gray-300">Av. Ciudadana #123, Ciudad, País</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-envelope"></i> Contacto</h4>
+                    <p class="text-gray-300">soporte@denunciasciudadanas.com</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-phone"></i> Teléfono</h4>
+                    <p class="text-gray-300">+123 456 7890</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 pt-4">
+                <p class="text-gray-300">&copy; 2025 Denuncias Ciudadanas | Todos los derechos reservados.</p>
+                <div class="flex justify-center space-x-6 mt-3">
+                    <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-linkedin-in text-xl"></i></a>
+                </div>
+                <div class="mt-4">
+                    <a href="#" class="text-black hover:text-yellow-300 transition text-sm"><i class="fas fa-file-contract"></i> Términos y Condiciones</a> |
+                    <a href="#" class="text-black hover:text-yellow-300 transition text-sm"><i class="fas fa-user-shield"></i> Política de Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+   
     <script>
-        let userData = {
-            name: "",
-            problemType: "",
-            urgency: ""
-        };
-
         function sendMessage() {
             const input = document.getElementById("chat-input");
             const chatBody = document.getElementById("chat-body");
-            const userMessage = input.value.trim();
-
+            let userMessage = input.value.trim();
+    
             if (userMessage === "") return;
-
+    
             // Mostrar mensaje del usuario
             const userDiv = document.createElement("div");
             userDiv.className = "user-message";
             userDiv.textContent = userMessage;
             chatBody.appendChild(userDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
-
             input.value = "";
-
-            // Procesar respuesta del chatbot
+    
+            // Respuesta del bot
             setTimeout(() => {
+                const botResponse = getBotResponse(userMessage);
                 const botDiv = document.createElement("div");
                 botDiv.className = "bot-message";
-                botDiv.textContent = getBotResponse(userMessage);
+                botDiv.innerHTML = botResponse;
                 chatBody.appendChild(botDiv);
                 chatBody.scrollTop = chatBody.scrollHeight;
             }, 1000);
         }
-
+    
         function handleKeyPress(event) {
             if (event.key === "Enter") {
                 sendMessage();
             }
         }
-
+    
         function getBotResponse(message) {
-            message = message.toLowerCase();
-
-            if (userData.name === "") {
-                userData.name = message;
-                return `¡Hola ${userData.name}! ¿Qué tipo de problema deseas reportar? (robo, accidente, vandalismo)`;
+            message = correctSpelling(message.toLowerCase());
+    
+            // Categorías de emergencias con palabras clave mejoradas
+            const emergencies = {
+                "general": ["ayuda", "socorro", "emergencia", "auxilio", "urgencia"],
+                "ambulancia": ["desmayo", "sangre", "dolor", "ataque", "paro", "ahogo", "intoxicación", "electrocución", "muerte", "muerto"],
+                "bomberos": ["incendio", "humo", "quemar", "explosión", "fuego"],
+                "policía": ["asalto", "robo", "violencia", "arma", "armas", "disparo", "balacera", "secuestro", "amenaza", "crimen", "terrorismo", "bomba", "narcotráfico"]
+            };
+    
+            // Detectar tipo de emergencia
+            for (const [type, keywords] of Object.entries(emergencies)) {
+                if (containsKeyword(message, keywords)) {
+                    getLocation(type);
+                    return `🚨 Emergencia detectada (${type.toUpperCase()}) <br> 🔹 Intentando obtener tu ubicación...`;
+                }
             }
-
-            if (userData.problemType === "") {
-                userData.problemType = message;
-                return `Entiendo, un ${userData.problemType}. ¿Cuál es el nivel de urgencia? (alta, media, baja)`;
-            }
-
-            if (userData.urgency === "") {
-                userData.urgency = message;
-                return `Gracias, ${userData.name}. Estamos registrando tu reporte sobre "${userData.problemType}" con urgencia "${userData.urgency}". ¿Deseas agregar más información?`;
-            }
-
-            if (message.includes("sí") || message.includes("agregar")) {
-                return "Por favor, proporciona más detalles sobre el incidente.";
-            }
-
-            if (message.includes("no")) {
-                return "Gracias por tu reporte. Un agente se pondrá en contacto contigo pronto.";
-            }
-
-            return "No estoy seguro de qué quieres decir. ¿Puedes ser más claro?";
+    
+            return "🤖 No detecto una emergencia, pero dime en qué puedo ayudarte.";
         }
-
-        // Mensaje de bienvenida automático
+    
+        function containsKeyword(message, keywords) {
+            return keywords.some(keyword => message.includes(keyword));
+        }
+    
+        function correctSpelling(text) {
+            const corrections = {
+                "ayda": "ayuda", "aydua": "ayuda",
+                "socoro": "socorro", "socro": "socorro",
+                "polisia": "policía", "polis": "policía",
+                "ambulansia": "ambulancia", "amblancia": "ambulancia",
+                "insendio": "incendio", "encendio": "incendio",
+                "azalto": "asalto", "asaltooo": "asalto",
+                "emegencia": "emergencia", "emrgencia": "emergencia",
+                "balacerra": "balacera",
+                "aramas": "armas", "armass": "armas",
+                "terrismo": "terrorismo",
+                "boma": "bomba", "bombba": "bomba",
+                "narotrafico": "narcotráfico",
+                "sequestro": "secuestro",
+                "disparoos": "disparo",
+                "acidente": "accidente", "aksidente": "accidente",
+                "urgncia": "urgencia",
+                "intoxicasion": "intoxicación",
+                "elektrocucion": "electrocución",
+                "muerrte": "muerte", "muertte": "muerte"
+            };
+    
+            for (const [wrong, correct] of Object.entries(corrections)) {
+                text = text.replace(new RegExp(`\\b${wrong}\\b`, "gi"), correct);
+            }
+            return text;
+        }
+    
+        function getLocation(service) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    sendEmergencyAlert(latitude, longitude, service);
+                }, error => {
+                    console.log("No se pudo obtener la ubicación:", error);
+                    alert("⚠️ No pudimos acceder a tu ubicación. Asegúrate de activar el GPS.");
+                });
+            } else {
+                alert("⚠️ Tu navegador no soporta geolocalización.");
+            }
+        }
+    
+        function sendEmergencyAlert(lat, lon, service) {
+            const emergencyNumbers = {
+                "general": "911",
+                "ambulancia": "066",
+                "bomberos": "068",
+                "policía": "089"
+            };
+    
+            let number = emergencyNumbers[service] || "911";
+            let mapLink = `https://www.google.com/maps?q=${lat},${lon}`;
+            let message = `🚨 Emergencia (${service.toUpperCase()}) <br> 📍 <a href="${mapLink}" target="_blank">Ver ubicación en mapa</a> <br> 📞 <a href="tel:${number}">Llamar al ${number}</a>`;
+    
+            setTimeout(() => {
+                const chatBody = document.getElementById("chat-body");
+                const botDiv = document.createElement("div");
+                botDiv.className = "bot-message";
+                botDiv.innerHTML = message;
+                chatBody.appendChild(botDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 2000);
+        }
+    
+        // Mensaje de bienvenida
         setTimeout(() => {
             const chatBody = document.getElementById("chat-body");
             const botDiv = document.createElement("div");
             botDiv.className = "bot-message";
-            botDiv.textContent = "¡Hola! Soy tu asistente virtual. ¿Cuál es tu nombre?";
+            botDiv.innerHTML = "👋 ¡Hola! Soy tu asistente de emergencias.<br>Si necesitas ayuda, dime qué ocurre.";
             chatBody.appendChild(botDiv);
         }, 1000);
     </script>
-
 </body>
 </html>
