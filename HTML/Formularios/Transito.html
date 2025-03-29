@@ -477,7 +477,7 @@
   <script>
 
 
-    // Modify your form in the HTML file
+    // Form submission handler
 const form = document.querySelector('form');
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -487,16 +487,23 @@ form.addEventListener('submit', async function(e) {
  
   // Get form data
   const formData = {
-    name: document.getElementById('name').value,
+    name: document.getElementById('name').value.trim(),
     date: document.getElementById('date').value,
-    incident: document.getElementById('incident').value,
-    vehicle: document.getElementById('vehicle').value,
-    witness: document.getElementById('witness').value
+    incident: document.getElementById('incident').value.trim(),
+    vehicle: document.getElementById('vehicle').value.trim(),
+    witness: document.getElementById('witness').value.trim()
   };
+  
+  // Form validation
+  if (!formData.name || !formData.date || !formData.incident) {
+    alert('Por favor complete todos los campos requeridos');
+    document.getElementById('loadingModal').classList.remove('show');
+    return;
+  }
  
   try {
-    // Send data to your server
-    const response = await fetch('http://localhost:3000/submit-transito', {
+    // Send data to your server - make sure this URL is correct
+    const response = await fetch('/submit-transito', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

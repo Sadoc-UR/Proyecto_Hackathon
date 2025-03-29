@@ -114,13 +114,22 @@ app.post('/submit-transito', async (req, res) => {
 
 
 // Manejo de errores global
-app.use((err, req, res, next) => {
+// CORS configuration
+app.use(cors({
+    origin: ['http://yourdomain.com', 'http://localhost:3000'], // Restrict to specific domains
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
+  
+  // Error handling middleware
+  app.use((err, req, res, next) => {
     console.error('Error no controlado:', err);
     res.status(500).json({
-        error: 'Error interno del servidor',
-        details: err.message
+      error: 'Error interno del servidor',
+      // Don't expose detailed error messages in production
+      details: process.env.NODE_ENV === 'development' ? err.message : 'Error interno'
     });
-});
+  });
 
 
 // Iniciar el servidor

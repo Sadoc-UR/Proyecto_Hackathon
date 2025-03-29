@@ -1,25 +1,24 @@
-// Try this updated MongoDB connection configuration
 const { MongoClient } = require('mongodb');
 
-// Use correct password - this should match your Atlas account
-const password = encodeURIComponent("pan"); // Encode the password to handle special characters
+// Use environment variables for sensitive information in a production environment
+const password = encodeURIComponent("pan");
 
 const uri = `mongodb+srv://luisangelherrerahdz:${password}@hackaton.qttaxah.mongodb.net/?retryWrites=true&w=majority&appName=Hackaton`;
 
 const client = new MongoClient(uri, {
-  // Modified TLS options
+  // MongoDB connection options
   tls: true,
-  tlsAllowInvalidCertificates: true, 
-  tlsAllowInvalidHostnames: true, // Add this line
+  // Be careful with these options in production - they reduce security
+  tlsAllowInvalidCertificates: false, // Change to false in production
   
-  // Increased timeouts
-  serverSelectionTimeoutMS: 30000,
-  connectTimeoutMS: 50000,
+  // Reasonable timeouts
+  serverSelectionTimeoutMS: 15000,
+  connectTimeoutMS: 30000,
   
   // API version
   serverApi: {
     version: '1',
-    strict: false, // Change to false for testing
+    strict: true, // Set to true for production
     deprecationErrors: true
   }
 });
@@ -29,28 +28,21 @@ const client = new MongoClient(uri, {
  * @returns {Promise<MongoClient>} The connected MongoDB client
  */
 async function connectToMongo() {
-    try {
-      // Connect with retries
-      for (let attempt = 1; attempt <= 3; attempt++) {
-        try {
-          await client.connect();
-         
-          // Test the connection
-          await client.db("admin").command({ ping: 1 });
-          console.log("Connected to MongoDB successfully!");
-          return client;
-        } catch (err) {
-          console.warn(`Connection attempt ${attempt} failed: ${err.message}`);
-          if (attempt === 3) throw err;
-          // Wait before retry
-          await new Promise(resolve => setTimeout(resolve, 3000));
-        }
-      }
-    } catch (error) {
-      console.error("Error connecting to MongoDB:", error);
-      throw error;
-    }
+  try {
+    await client.connect();
+    console.log("Connected to MongoDB successfully!");
+    return client;
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+    throw error;
   }
+}
+
+module.exports = {
+  connectToMongo,
+  insertFormData,
+  storeChatMessage
+};
 
 
 /**
