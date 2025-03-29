@@ -1,31 +1,28 @@
+// Try this updated MongoDB connection configuration
 const { MongoClient } = require('mongodb');
 
-
-// Use environment variables for sensitive info
-// const password = process.env.MONGO_PASSWORD;
-const password = "pan"; // Only for development!
-
+// Use correct password - this should match your Atlas account
+const password = encodeURIComponent("pan"); // Encode the password to handle special characters
 
 const uri = `mongodb+srv://luisangelherrerahdz:${password}@hackaton.qttaxah.mongodb.net/?retryWrites=true&w=majority&appName=Hackaton`;
 
-
 const client = new MongoClient(uri, {
-  // Simplified TLS options
+  // Modified TLS options
   tls: true,
-  tlsAllowInvalidCertificates: true, // Try setting this to true for testing
- 
-  // Connection timeouts
-  serverSelectionTimeoutMS: 15000, // Increase timeout
-  connectTimeoutMS: 30000, // Increase timeout
- 
+  tlsAllowInvalidCertificates: true, 
+  tlsAllowInvalidHostnames: true, // Add this line
+  
+  // Increased timeouts
+  serverSelectionTimeoutMS: 30000,
+  connectTimeoutMS: 50000,
+  
   // API version
   serverApi: {
     version: '1',
-    strict: true,
+    strict: false, // Change to false for testing
     deprecationErrors: true
   }
 });
-
 
 /**
  * Connects to MongoDB Atlas
