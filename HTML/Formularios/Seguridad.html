@@ -1,350 +1,191 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="../../IMG/LogoQ.png">
-  <title>Reporte de Seguridad</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <style>
-    body {
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        min-height: 100vh;
-        background: linear-gradient(135deg, #a1caff, #1677d1);
-        color: white;
-        font-family: 'Arial', sans-serif;
-        text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #a1caff, #1677d1);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-    .menu-container {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        width: 90%;
-        max-width: 600px;
-        color: #1677d1;
-        margin-top: 20px;
-    }
+        /* 🔥 CONTENEDOR DEL CHAT */
+        .chat-container {
+            background: white;
+            color: black;
+            width: 80%;
+            max-width: 600px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
 
-    .menu-item {
-        font-size: 16px;
-        border-radius: 25px;
-        padding: 12px;
-        width: 100%;
-        text-transform: uppercase;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        color: white;
-        border: none;
-        margin-bottom: 15px;
-    }
+        .chat-header {
+            background: #1677d1;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
 
-    .menu-item:hover {
-        transform: scale(1.05);
-        filter: brightness(1.2);
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    }
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .modal {
-        position: fixed;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 0, 0, 0.5);
-        visibility: hidden;
-        opacity: 0;
-        transition: visibility 0s, opacity 0.3s;
-    }
+        .chat-footer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            background: #f9f9f9;
+        }
 
-    .modal.show {
-        visibility: visible;
-        opacity: 1;
-    }
+        .chat-footer input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    .modal-content {
-        background: #2C3E50;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-        width: 80%;
-        max-width: 350px;
-        color: white;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
+        .chat-footer button {
+            background: #1677d1;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    .spinner {
-        width: 50px;
-        height: 50px;
-        border: 5px solid rgba(255, 255, 255, 0.3);
-        border-top-color: white;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin: 15px auto;
-    }
+        .user-message, .bot-message {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
 
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
+        .user-message {
+            background: #1677d1;
+            color: white;
+            align-self: flex-end;
+            text-align: right;
+        }
 
-    nav a {
-        color: white;
-        font-weight: bold;
-        text-decoration: none;
-        padding: 10px 15px;
-        border-radius: 20px;
-        transition: all 0.3s ease;
-        margin: 0 5px;
-    }
-
-    nav a:hover {
-        text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-        text-align: left;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-        color: #1677d1;
-        font-weight: bold;
-    }
-
-    input, textarea, select {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid #ccc;
-        border-radius: 8px;
-        background-color: white;
-        color: #333;
-        font-size: 16px;
-        transition: all 0.3s;
-    }
-
-    input:focus, textarea:focus, select:focus {
-        border-color: #1677d1;
-        box-shadow: 0 0 0 3px rgba(22, 119, 209, 0.2);
-        outline: none;
-    }
-
-    textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
-
-    .btn-submit {
-        background-color: #1677d1;
-        color: white;
-        border: none;
-        padding: 14px 24px;
-        border-radius: 25px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-        display: block;
-        width: 100%;
-        text-transform: uppercase;
-        margin-top: 20px;
-    }
-
-    .btn-submit:hover {
-        transform: scale(1.05);
-        filter: brightness(1.2);
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    h1 {
-        color: #1677d1;
-        font-size: 24px;
-        margin-bottom: 25px;
-        font-weight: bold;
-    }
-
-    .circle-menu {
-        background: linear-gradient(to right, #1e88e5, #1565c0); /* Degradado de blue-600 a blue-800 */
-        padding: 10px;
-        border-radius: 0;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-        width: 100%;
-        max-width: none;
-        color: #1677d1;
-        display: flex;
-        justify-content: flex-start;
-    }
-
-    .circle-item {
-        background: transparent;
-        color: rgba(255, 255, 255, 0.95);
-        font-weight: bold;
-        font-size: 16px;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin: 0 10px;
-        padding: 10px 15px;
-        border-radius: 0;
-        border: none;
-    }
-
-    .circle-item:hover {
-        background-color: rgba(13, 56, 96, 0.2);
-        transform: none;
-        box-shadow: none;
-    }
-</style>
+        .bot-message {
+            background: #f1f1f1;
+            color: black;
+            align-self: flex-start;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <div class="circle-menu bg-gradient-to-r from-sky-400 to-blue-600">
-        <a href="../Index.html">
-            <img src="../../IMG/LogQRO-removebg-preview.png" alt="Logo" class="circle-item" style="width: 110px; height: auto;">
-        </a>
-        <a href="../Index.html" class="circle-item" style="display: flex; align-items: center; gap: 5px; text-decoration: none;">
-            <img src="../../IMG/home.png" alt="Inicio" style="width: 20px; height: auto;">
-            <span>Inicio</span>
-        </a>
-        <a href="../Index.html" class="circle-item" style="display: flex; align-items: center; gap: 5px; text-decoration: none;">
-            <img src="../../IMG/group_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="Inicio" style="width: 20px; height: auto;">
-            <span>Sobre Nosotros</span>
-        </a>
-        <a href="Preguntas.html" class="circle-item" style="display: flex; align-items: center; gap: 5px; text-decoration: none;">
-            <img src="../../IMG/help_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="Inicio" style="width: 20px; height: auto;">
-            <span>FAQ</span>
-        </a>
-        <div class="circle-item" style="display: flex; align-items: center; gap: 5px;">
-            <img src="../../IMG/rename.png" alt="Inicio" style="width: 20px; height: auto;">
-            <span>Contacto</span>
+
+    <!-- CONTENEDOR DEL CHAT EN PANTALLA COMPLETA -->
+    <div class="chat-container">
+        <div class="chat-header">Asistente Virtual</div>
+        <div class="chat-body" id="chat-body"></div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Escribe aquí..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Enviar</button>
         </div>
     </div>
 
-  <div class="menu-container">
-    <h1>Reporte de Seguridad</h1>
-    <form action="/submit-seguridad" method="post">
-      <div class="form-group">
-        <label for="name">Nombre completo:</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="location">Dirección:</label>
-        <input type="text" id="location" name="location" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="description">Descripción de la situación:</label>
-        <textarea id="description" name="description" required></textarea>
-      </div>
-      
-      <div class="form-group">
-        <label for="evidence">Evidencia:</label>
-        <input type="file" id="evidence" name="evidence">
-      </div>
-      
-      <div class="form-group">
-        <label for="urgency">Nivel de urgencia:</label>
-        <select id="urgency" name="urgency">
-          <option value="alta">Alta</option>
-          <option value="media">Media</option>
-          <option value="baja">Baja</option>
-        </select>
-      </div>
-      
-      <button type="submit" class="btn-submit">Enviar Reporte</button>
-    </form>
-  </div>
+    <script>
+        let userData = {
+            name: "",
+            problemType: "",
+            urgency: ""
+        };
 
-  <div id="loadingModal" class="modal">
-    <div class="modal-content">
-        <h2>Procesando su solicitud</h2>
-        <div class="spinner"></div>
-        <p>Por favor espere...</p>
-    </div>
-  </div>
+        function sendMessage() {
+            const input = document.getElementById("chat-input");
+            const chatBody = document.getElementById("chat-body");
+            const userMessage = input.value.trim();
 
-  <footer class="w-full bg-gradient-to-r from-sky-400 to-blue-600 text-white py-8 mt-12 text-center">
-    <div class="container mx-auto px-6">
-        <div class="flex flex-wrap justify-center gap-8 mb-6">
-            <div>
-                <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-map-marker-alt"></i> Dirección</h4>
-                <p class="text-gray-300">Av. Ciudadana #123, Ciudad, País</p>
-            </div>
-            <div>
-                <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-envelope"></i> Contacto</h4>
-                <p class="text-gray-300">soporte@denunciasciudadanas.com</p>
-            </div>
-            <div>
-                <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-phone"></i> Teléfono</h4>
-                <p class="text-gray-300">+123 456 7890</p>
-            </div>
-        </div>
-        <div class="border-t border-gray-600 pt-4">
-            <p class="text-gray-300">&copy; 2025 Denuncias Ciudadanas | Todos los derechos reservados.</p>
-            <div class="flex justify-center space-x-6 mt-3">
-                <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-facebook-f text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-twitter text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-instagram text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-linkedin-in text-xl"></i></a>
-            </div>
-            <div class="mt-4">
-                <a href="#" class="text-black hover:text-yellow-300 transition text-sm"><i class="fas fa-file-contract"></i> Términos y Condiciones</a> |
-                <a href="#" class="text-black hover:text-yellow-300 transition text-sm"><i class="fas fa-user-shield"></i> Política de Privacidad</a>
-            </div>
-        </div>
-    </div>
-</footer>
-    
-  <script>
-    const startChat = require('../gemminiConnection');
-    const { insertFormData } = require('../mongoConnection');
+            if (userMessage === "") return;
 
-    document.querySelector('form').addEventListener('submit', async (event) => {
-        event.preventDefault();
-        document.getElementById('loadingModal').classList.add('show');
-        const userPrompt = "Provide details for the security form";
-        
-        try {
-            const formData = await startChat(userPrompt);
-            document.getElementById('name').value = formData.name || '';
-            document.getElementById('location').value = formData.location || '';
-            document.getElementById('description').value = formData.description || '';
-            document.getElementById('urgency').value = formData.urgency || 'media';
-        } catch (error) {
-            console.error("Error populating the form:", error);
+            // Mostrar mensaje del usuario
+            const userDiv = document.createElement("div");
+            userDiv.className = "user-message";
+            userDiv.textContent = userMessage;
+            chatBody.appendChild(userDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            input.value = "";
+
+            // Procesar respuesta del chatbot
+            setTimeout(() => {
+                const botDiv = document.createElement("div");
+                botDiv.className = "bot-message";
+                botDiv.textContent = getBotResponse(userMessage);
+                chatBody.appendChild(botDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 1000);
         }
 
-        const formDataToSubmit = {
-            name: document.getElementById('name').value,
-            location: document.getElementById('location').value,
-            description: document.getElementById('description').value,
-            urgency: document.getElementById('urgency').value
-        };  
-
-        try {
-            const result = await insertFormData("Seguridad", formDataToSubmit);
-            document.getElementById('loadingModal').classList.remove('show');
-            alert("Form data submitted successfully!");
-        } catch (error) {
-            console.error("Error submitting form data:", error);
-            document.getElementById('loadingModal').classList.remove('show');
-            alert("Failed to submit form data.");
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
         }
-    });
-  </script>
+
+        function getBotResponse(message) {
+            message = message.toLowerCase();
+
+            if (userData.name === "") {
+                userData.name = message;
+                return `¡Hola ${userData.name}! ¿Qué tipo de problema deseas reportar? (robo, accidente, vandalismo)`;
+            }
+
+            if (userData.problemType === "") {
+                userData.problemType = message;
+                return `Entiendo, un ${userData.problemType}. ¿Cuál es el nivel de urgencia? (alta, media, baja)`;
+            }
+
+            if (userData.urgency === "") {
+                userData.urgency = message;
+                return `Gracias, ${userData.name}. Estamos registrando tu reporte sobre "${userData.problemType}" con urgencia "${userData.urgency}". ¿Deseas agregar más información?`;
+            }
+
+            if (message.includes("sí") || message.includes("agregar")) {
+                return "Por favor, proporciona más detalles sobre el incidente.";
+            }
+
+            if (message.includes("no")) {
+                return "Gracias por tu reporte. Un agente se pondrá en contacto contigo pronto.";
+            }
+
+            return "No estoy seguro de qué quieres decir. ¿Puedes ser más claro?";
+        }
+
+        // Mensaje de bienvenida automático
+        setTimeout(() => {
+            const chatBody = document.getElementById("chat-body");
+            const botDiv = document.createElement("div");
+            botDiv.className = "bot-message";
+            botDiv.textContent = "¡Hola! Soy tu asistente virtual. ¿Cuál es tu nombre?";
+            chatBody.appendChild(botDiv);
+        }, 1000);
+    </script>
+
 </body>
 </html>
