@@ -280,12 +280,45 @@
     
             // Categorías de emergencias con palabras clave mejoradas
             const emergencies = {
-                "general": ["ayuda", "socorro", "emergencia", "auxilio", "urgencia"],
-                "ambulancia": ["ambulancia", "patrulla", "desmayo", "sangre", "dolor", "ataque", "paro", "ahogo", "intoxicación", "electrocución", "muerte", "muerto"],
-                "bomberos": ["incendio", "humo", "quemar", "explosión", "fuego"],
-                "policía": ["asalto", "robo", "violencia", "arma", "armas", "disparo", "balacera", "secuestro", "amenaza", "crimen", "terrorismo", "bomba", "narcotráfico"]
-            };
-    
+        "general": [
+            "ayuda", "socorro", "emergencia", "auxilio", "urgencia",
+            "necesito ayuda", "alguien me ayuda", "por favor ayuda",
+            "peligro", "rescate", "necesito asistencia", "auxilio por favor"
+        ],
+        "ambulancia": [
+            "ambulancia", "patrulla", "desmayo", "sangre", "dolor", "ataque", 
+            "paro", "ahogo", "intoxicación", "electrocución", "muerte", "muerto",
+            "herida", "fractura", "convulsión", "quemadura", "emorragia",
+            "choque", "infarto", "accidente", "presión baja", "presión alta",
+            "diabetes", "deshidratación", "asfixia", "ahogamiento", "falta de aire",
+            "comida atorada", "veneno", "sobredosis", "medicamento equivocado",
+            "desmayo repentino", "corazón acelerado", "latidos irregulares",
+            "golpe fuerte", "perdida de conocimiento", "dolor de cabeza intenso",
+            "visión borrosa", "piernas dormidas", "no siento mi brazo"
+        ],
+        "bomberos": [
+            "incendio", "humo", "quemar", "explosión", "fuego", "llamas", 
+            "chispa", "corto circuito", "gas", "fuga de gas", "olor a gas",
+            "quema de basura", "prendió fuego", "gasolina", "estufa explotó",
+            "candela", "hogar en llamas", "edificio en llamas", "alarma de incendio",
+            "extintor no funciona", "tanque de gas", "carro en llamas",
+            "electrodoméstico explotó", "cable quemado", "chispas en el techo",
+            "calentador explotó", "humo negro", "pared caliente", "ventanas rotas por fuego"
+        ],
+        "policía": [
+            "asalto", "robo", "violencia", "arma", "armas", "disparo", "balacera",
+            "secuestro", "amenaza", "crimen", "terrorismo", "bomba", "narcotráfico",
+            "vandalismo", "acoso", "intento de robo", "ladrones", "alguien sospechoso",
+            "golpearon a alguien", "gritos en la calle", "pandilla", "fraude",
+            "estafa", "me están siguiendo", "me vigilan", "sospechoso en mi casa",
+            "hombre con pistola", "arma blanca", "navaja", "pistola", "revólver",
+            "narcomenudeo", "venta de drogas", "cartel", "crimen organizado",
+            "desaparición", "personas encapuchadas", "se escucharon disparos",
+            "saqueo", "desorden público", "pelea en la calle", "amenaza de bomba",
+            "extorsión", "llamadas amenazantes", "fraude bancario"
+        ]
+     };
+
             // Detectar tipo de emergencia
             for (const [type, keywords] of Object.entries(emergencies)) {
                 if (containsKeyword(message, keywords)) {
@@ -348,27 +381,50 @@
         }
     
         function sendEmergencyAlert(lat, lon, service) {
-            const emergencyNumbers = {
-                "general": "911",
-                "ambulancia": "066",
-                "bomberos": "068",
-                "policía": "089"
-            };
-    
-            let number = emergencyNumbers[service] || "911";
-            let mapLink = `https://www.google.com/maps?q=${lat},${lon}`;
-            let message = `🚨 Emergencia (${service.toUpperCase()}) <br> 📍 <a href="${mapLink}" target="_blank">Ver ubicación en mapa</a> <br> 📞 <a href="tel:${number}">Llamar al ${number}</a>`;
-    
-            setTimeout(() => {
-                const chatBody = document.getElementById("chat-body");
-                const botDiv = document.createElement("div");
-                botDiv.className = "bot-message";
-                botDiv.innerHTML = message;
-                chatBody.appendChild(botDiv);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 2000);
-        }
-    
+    const emergencyNumbers = {
+        "general": "911", // Número de emergencia general
+        "ambulancia": "066", // Ambulancia en algunas regiones
+        "bomberos": "068", // Bomberos en algunas regiones
+        "policía": "089", // Policía en algunas regiones
+        "cruz roja": "065", // Cruz Roja
+        "protección civil": "074", // Protección Civil
+        "guardia nacional": "088", // Guardia Nacional
+        "tránsito": "060", // Emergencias de tráfico
+        "rescate": "075", // Búsqueda y rescate
+        "gas": "800-999-8000", // Fuga de gas
+        "electricidad": "071", // Fallas eléctricas
+        "violencia doméstica": "800-108-4053", // Línea contra violencia de género
+        "suicidio": "800-273-8255", // Línea de prevención del suicidio
+        "secuestro": "089", // Denuncia de secuestro
+        "fraude": "088", // Fraude y delitos cibernéticos
+        "desastres naturales": "074", // Protección Civil en caso de desastres
+        "maltrato infantil": "800-847-6473", // Línea de protección infantil
+    };
+
+    let number = emergencyNumbers[service] || "911";
+    let mapLink = `https://www.google.com/maps?q=${lat},${lon}`;
+    let message = `🚨 Emergencia (${service.toUpperCase()}) <br> 📍 <a href="${mapLink}" target="_blank">Ver ubicación en mapa</a> <br> 📞 <a href="tel:${number}">Llamar al ${number}</a>`;
+
+    setTimeout(() => {
+        const chatBody = document.getElementById("chat-body");
+        const botDiv = document.createElement("div");
+        botDiv.className = "bot-message";
+        botDiv.innerHTML = message;
+        chatBody.appendChild(botDiv);
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Llamada automática al número de emergencia
+        autoCall(number);
+    }, 2000);
+}
+
+// Función para realizar la llamada automáticamente
+function autoCall(number) {
+    setTimeout(() => {
+        window.location.href = `tel:${number}`;
+    }, 3000); // Espera 3 segundos antes de iniciar la llamada automática
+}
+
         // Mensaje de bienvenida
         setTimeout(() => {
             const chatBody = document.getElementById("chat-body");
