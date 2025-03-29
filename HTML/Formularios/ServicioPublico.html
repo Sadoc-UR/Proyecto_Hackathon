@@ -208,6 +208,143 @@
         transform: none;
         box-shadow: none;
     }
+
+        /* Estilos mejorados para el chat */
+.chat-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.chat-header {
+    background: linear-gradient(135deg, #1677d1, #0c4c8a);
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-body {
+    height: 350px;
+    overflow-y: auto;
+    padding: 15px;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-footer {
+    display: flex;
+    padding: 10px;
+    background-color: white;
+    border-top: 1px solid #e9ecef;
+}
+
+.chat-footer input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.chat-footer input:focus {
+    outline: none;
+    border-color: #1677d1;
+    box-shadow: 0 0 0 2px rgba(22, 119, 209, 0.2);
+}
+
+.chat-footer button {
+    background-color: #1677d1;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.chat-footer button:hover {
+    background-color: #0c4c8a;
+}
+
+.user-message, .bot-message {
+    max-width: 80%;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 18px;
+    word-wrap: break-word;
+    animation: fadeIn 0.3s;
+}
+
+.user-message {
+    background: linear-gradient(135deg, #1677d1, #0c4c8a);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+
+.bot-message {
+    background: white;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Indicador de escritura */
+.dot-typing {
+    position: relative;
+    left: -9999px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #1677d1;
+    color: #1677d1;
+    box-shadow: 9984px 0 0 0 #1677d1, 9999px 0 0 0 #1677d1, 10014px 0 0 0 #1677d1;
+    animation: dot-typing 1.5s infinite linear;
+}
+
+@keyframes dot-typing {
+    0% {
+        box-shadow: 9984px 0 0 0 #1677d1, 9999px 0 0 0 #1677d1, 10014px 0 0 0 #1677d1;
+    }
+    16.667% {
+        box-shadow: 9984px -10px 0 0 #1677d1, 9999px 0 0 0 #1677d1, 10014px 0 0 0 #1677d1;
+    }
+    33.333% {
+        box-shadow: 9984px 0 0 0 #1677d1, 9999px 0 0 0 #1677d1, 10014px 0 0 0 #1677d1;
+    }
+    50% {
+        box-shadow: 9984px 0 0 0 #1677d1, 9999px -10px 0 0 #1677d1, 10014px 0 0 0 #1677d1;
+    }
+    66.667% {
+        box-shadow: 9984px 0 0 0 #1677d1, 9999px 0 0 0 #1677d1, 10014px 0 0 0 #1677d1;
+    }
+    83.333% {
+        box-shadow: 9984px 0 0 0 #1677d1, 9999px 0 0 0 #1677d1, 10014px -10px 0 0 #1677d1;
+    }
+    100% {
+        box-shadow: 9984px 0 0 0 #1677d1, 9999px 0 0 0 #1677d1, 10014px 0 0 0 #1677d1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 </style>
 </head>
 <body>
@@ -308,36 +445,75 @@
     </div>
 </footer>
   
+<div class="chat-container fixed bottom-5 right-5 bg-white text-black rounded-lg shadow-lg w-80">
+    <div class="chat-header bg-gradient-to-r from-blue-500 to-blue-700 text-white p-3 rounded-t-lg flex justify-between items-center">
+        <h4 class="font-bold">Asistente Virtual</h4>
+        <div>
+            <button id="minimize-chat" class="text-white hover:text-gray-200 mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M14 8a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h10a1 1 0 0 0 1-1z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="chat-body p-3 h-80 overflow-y-auto" id="chat-body">
+        <!-- Mensajes del chat aparecerán aquí -->
+    </div>
+    <div class="chat-footer flex p-3 border-t">
+        <input type="text" id="chat-input" class="flex-1 border rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Escribe tu mensaje...">
+        <button onclick="sendMessage()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 ml-2 rounded-full transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+            </svg>
+        </button>
+    </div>
+</div>
+  
   <script>
+
+    document.getElementById('minimize-chat').addEventListener('click', function() {
+        const chatBody = document.querySelector('.chat-body');
+        const chatFooter = document.querySelector('.chat-footer');
+        
+        if (chatBody.style.display === 'none') {
+            chatBody.style.display = 'flex';
+            chatFooter.style.display = 'flex';
+            this.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M14 8a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h10a1 1 0 0 0 1-1z"/></svg>';
+        } else {
+            chatBody.style.display = 'none';
+            chatFooter.style.display = 'none';
+            this.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>';
+        }
+    });
     const startChat = require('../gemminiConnection');
     const { insertFormData } = require('../mongoConnection');
 
     document.querySelector('form').addEventListener('submit', async (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
         document.getElementById('loadingModal').classList.add('show');
-        const userPrompt = "Provide details for the public services form";
+        const userPrompt = "Provide details for the traffic form";
         
         try {
             const formData = await startChat(userPrompt);
             document.getElementById('name').value = formData.name || '';
-            document.getElementById('location').value = formData.location || '';
-            document.getElementById('type').value = formData.type || '';
-            document.getElementById('description').value = formData.description || '';
-            document.getElementById('frequency').value = formData.frequency || 'ocasional';
+            document.getElementById('date').value = formData.date || '';
+            document.getElementById('incident').value = formData.incident || '';
+            document.getElementById('vehicle').value = formData.vehicle || '';
+            document.getElementById('witness').value = formData.witness || '';
         } catch (error) {
             console.error("Error populating the form:", error);
         }
 
         const formDataToSubmit = {
             name: document.getElementById('name').value,
-            location: document.getElementById('location').value,
-            type: document.getElementById('type').value,
-            description: document.getElementById('description').value,
-            frequency: document.getElementById('frequency').value
+            date: document.getElementById('date').value,
+            incident: document.getElementById('incident').value,
+            vehicle: document.getElementById('vehicle').value,
+            witness: document.getElementById('witness').value
         };
 
         try {
-            const result = await insertFormData("ServicioPublico", formDataToSubmit);
+            const result = await insertFormData("Transito", formDataToSubmit);
             document.getElementById('loadingModal').classList.remove('show');
             alert("Form data submitted successfully!");
         } catch (error) {
@@ -346,6 +522,116 @@
             alert("Failed to submit form data.");
         }
     });
+        // Función para enviar un mensaje y recibir respuesta de Gemini
+async function sendMessage() {
+    const input = document.getElementById("chat-input");
+    const chatBody = document.getElementById("chat-body");
+    const userMessage = input.value.trim();
+
+    if (userMessage === "") return;
+
+    // Mostrar mensaje del usuario
+    appendMessage("user", userMessage);
+    
+    // Limpiar el input
+    input.value = "";
+    
+    // Mostrar indicador de carga
+    const loadingId = showLoading();
+
+    // Enviar mensaje al backend
+    try {
+        const response = await fetch("http://localhost:3000/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message: userMessage }),
+        });
+
+        // Ocultar indicador de carga
+        hideLoading(loadingId);
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        // Mostrar respuesta del bot
+        appendMessage("bot", data.reply || "Lo siento, no puedo responder en este momento.");
+        
+    } catch (error) {
+        console.error("Error al enviar el mensaje:", error);
+        
+        // Ocultar indicador de carga
+        hideLoading(loadingId);
+        
+        appendMessage("bot", "Hubo un error al procesar tu mensaje. Inténtalo de nuevo más tarde.");
+    }
+}
+
+// Función para agregar mensajes al chat
+function appendMessage(sender, message) {
+    const chatBody = document.getElementById("chat-body");
+    const messageDiv = document.createElement("div");
+    
+    messageDiv.className = sender === "user" ? "user-message" : "bot-message";
+    
+    // Convertir URLs en enlaces clicables
+    const linkedMessage = linkify(message);
+    messageDiv.innerHTML = linkedMessage;
+    
+    chatBody.appendChild(messageDiv);
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// Función para convertir URLs en texto a enlaces HTML
+function linkify(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '" target="_blank" class="text-blue-600 hover:underline">' + url + '</a>';
+    });
+}
+
+// Mostrar un indicador de carga mientras se espera la respuesta
+function showLoading() {
+    const chatBody = document.getElementById("chat-body");
+    const loadingDiv = document.createElement("div");
+    const loadingId = "loading-" + Date.now();
+    
+    loadingDiv.id = loadingId;
+    loadingDiv.className = "bot-message";
+    loadingDiv.innerHTML = '<div class="flex space-x-2"><div class="dot-typing"></div></div>';
+    
+    chatBody.appendChild(loadingDiv);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    
+    return loadingId;
+}
+
+// Ocultar el indicador de carga
+function hideLoading(loadingId) {
+    const loadingDiv = document.getElementById(loadingId);
+    if (loadingDiv) {
+        loadingDiv.remove();
+    }
+}
+
+// Manejar la pulsación de Enter en el campo de entrada
+document.getElementById("chat-input").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        sendMessage();
+    }
+});
+
+// Inicializar el chat con un mensaje de bienvenida
+window.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        appendMessage("bot", "¡Hola! Soy el asistente virtual de Denuncias Ciudadanas. ¿En qué puedo ayudarte hoy?");
+    }, 500);
+});
   </script>
 </body>
 </html>
