@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../../IMG/LogoQ.png">
+  <title>Preguntas Frecuentes - Denuncias</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #a1caff, #1677d1);
+        color: white;
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+    }
+
+    .menu-container {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 800px;
+        color: #1677d1;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    .menu-item {
+        font-size: 16px;
+        border-radius: 25px;
+        padding: 12px;
+        width: 100%;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: white;
+        border: none;
+        margin-bottom: 15px;
+    }
+
+    .menu-item:hover {
+        transform: scale(1.05);
+        filter: brightness(1.2);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-item {
+        margin-bottom: 20px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 15px;
+    }
+    
+    .faq-item:last-child {
+        border-bottom: none;
+    }
+    
+    .faq-question {
+        font-weight: bold;
+        color: #1677d1;
+        font-size: 18px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .faq-answer {
+        color: #333;
+        line-height: 1.6;
+        padding-left: 5px;
+        display: none;
+    }
+    
+    .faq-question.active + .faq-answer {
+        display: block;
+    }
+
+    .faq-question:hover {
+        color: #0d47a1;
+    }
+
+    .category-title {
+        color: #0d47a1;
+        font-size: 20px;
+        margin: 25px 0 15px 0;
+        font-weight: bold;
+        text-align: left;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #1677d1;
+    }
+
+    .modal {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.5);
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.3s;
+    }
+
+    .modal.show {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .modal-content {
+        background: #2C3E50;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        width: 80%;
+        max-width: 350px;
+        color: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    nav a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        margin: 0 5px;
+    }
+
+    nav a:hover {
+        text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+        color: #1677d1;
+        font-size: 24px;
+        margin-bottom: 25px;
+        font-weight: bold;
+    }
+
+    .circle-menu {
+        background: linear-gradient(to right, #1e88e5, #1565c0);
+        padding: 10px;
+        border-radius: 0;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: none;
+        color: #1677d1;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .circle-item {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: bold;
+        font-size: 16px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0 10px;
+        padding: 10px 15px;
+        border-radius: 0;
+        border: none;
+    }
+
+    .circle-item:hover {
+        background-color: rgba(13, 56, 96, 0.2);
+        transform: none;
+        box-shadow: none;
+    }
+
+    .search-container {
+        margin: 20px 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .search-input {
+        padding: 12px;
+        width: 80%;
+        border-radius: 25px;
+        border: 2px solid #ccc;
+        font-size: 16px;
+        transition: all 0.3s;
+        color: #333;
+    }
+    
+    .search-input:focus {
+        outline: none;
+        border-color: #1677d1;
+        box-shadow: 0 0 8px rgba(22, 119, 209, 0.4);
+    }
+    
+    .btn-search {
+        border-radius: 50%;
+        width: 46px;
+        height: 46px;
+        background-color: #1677d1;
+        color: white;
+        border: none;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .btn-search:hover {
+        background-color: #0d47a1;
+    }
+  </style>
+</head>
+<body>
+    <div class="circle-menu bg-gradient-to-r from-blue-600 to-blue-800">
+        <a href="../Index.html">
+            <img src="../../IMG/LogQRO-removebg-preview.png" alt="Logo" class="circle-item" style="width: 110px; height: auto;">
+        </a>
+        <a href="../Index.html" class="circle-item" style="display: flex; align-items: center; gap: 5px; text-decoration: none;">
+            <img src="../../IMG/home.png" alt="Inicio" style="width: 20px; height: auto;">
+            <span>Inicio</span>
+        </a>
+        <div class="circle-item" style="display: flex; align-items: center; gap: 5px;">
+            <img src="../../IMG/group_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="Sobre Nosotros" style="width: 20px; height: auto;">
+            <span>Sobre Nosotros</span>
+        </div>
+        <div class="circle-item" style="display: flex; align-items: center; gap: 5px; background-color: rgba(13, 56, 96, 0.2);">
+            <img src="../../IMG/help_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="FAQ" style="width: 20px; height: auto;">
+            <span>FAQ</span>
+        </div>
+        <div class="circle-item" style="display: flex; align-items: center; gap: 5px;">
+            <img src="../../IMG/rename.png" alt="Contacto" style="width: 20px; height: auto;">
+            <span>Contacto</span>
+        </div>
+    </div>
+
+    <div class="menu-container">
+        <h1>Preguntas Frecuentes sobre Denuncias</h1>
+        
+        <div class="search-container">
+            <input type="text" id="searchFaq" class="search-input" placeholder="Buscar preguntas...">
+            <button class="btn-search">
+                <img src="../../IMG/Lupa.png" alt="Buscar" style="width: 24px; height: 24px;">
+            </button>
+        </div>
+        
+        <div class="category-title">Información General</div>
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Qué tipos de denuncias puedo realizar?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Puede realizar diversos tipos de denuncias, incluyendo: tránsito y vialidad, seguridad ciudadana, medio ambiente, infraestructura urbana, salud pública, servicios públicos, entre otros. Cada tipo de denuncia tiene su propio formulario específico para garantizar que se recopile toda la información necesaria.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Es obligatorio identificarme al realizar una denuncia?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Si bien es recomendable identificarse para poder dar seguimiento adecuado a su caso, también existe la opción de realizar denuncias anónimas para ciertos tipos de reportes. En los formularios correspondientes encontrará esta opción si está disponible para ese tipo de denuncia.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Cuál es el tiempo de respuesta tras realizar una denuncia?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                El tiempo de respuesta varía según la naturaleza y urgencia de la denuncia. Las denuncias urgentes (como situaciones de peligro inminente) se atienden de inmediato, mientras que otras pueden tomar entre 24-72 horas para recibir una respuesta inicial. En todos los casos, recibirá un número de folio para dar seguimiento a su denuncia.
+            </div>
+        </div>
+
+        <div class="category-title">Proceso de Denuncia</div>
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Cómo puedo realizar una denuncia en línea?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Para realizar una denuncia en línea, debe seguir estos pasos:<br>
+                1. Seleccione el tipo de denuncia que desea reportar en la página principal<br>
+                2. Complete el formulario correspondiente con toda la información solicitada<br>
+                3. Adjunte evidencias si las tiene (fotos, videos, documentos)<br>
+                4. Revise la información proporcionada<br>
+                5. Envíe el formulario<br>
+                6. Guarde el número de folio para seguimiento
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Qué información necesito para realizar una denuncia de tránsito?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Para una denuncia de tránsito, necesitará:<br>
+                - Su información personal (a menos que elija el anonimato)<br>
+                - Fecha, hora y ubicación exacta del incidente<br>
+                - Descripción detallada del incidente<br>
+                - Información sobre los vehículos involucrados (tipo, color, placa si es posible)<br>
+                - Datos de testigos (si los hay)<br>
+                - Evidencias como fotos o videos (opcionales pero muy útiles)
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Puedo adjuntar fotos o videos a mi denuncia?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Sí, nuestro sistema permite adjuntar archivos multimedia como evidencia. Puede subir fotos, videos y documentos que respalden su denuncia. Los formatos aceptados son JPG, PNG, MP4 y PDF. El tamaño máximo por archivo es de 10MB y puede adjuntar hasta 5 archivos por denuncia.
+            </div>
+        </div>
+
+        <div class="category-title">Seguimiento y Resolución</div>
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Cómo puedo dar seguimiento a mi denuncia?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Para dar seguimiento a su denuncia, utilice el número de folio que recibió al momento de realizar el reporte. Puede verificar el estado de su denuncia ingresando este número en la sección "Consultar Denuncia" de nuestro sitio web.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Qué hago si necesito complementar mi denuncia con más información?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Si necesita agregar información adicional a una denuncia ya presentada, puede hacerlo a través de la sección "Actualizar Denuncia" en nuestro sitio web. Deberá ingresar su número de folio y la información de contacto que proporcionó inicialmente. También puede comunicarse directamente con nuestro centro de atención para proporcionar la información adicional.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Qué sucede después de que mi denuncia ha sido procesada?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Una vez que su denuncia ha sido procesada, se asigna a la unidad correspondiente para su investigación. Recibirá notificaciones sobre cambios en el estado de su denuncia si proporcionó información de contacto. El proceso puede incluir entrevistas adicionales, recopilación de evidencias y, dependiendo del caso, procedimientos administrativos o legales. Al finalizar el proceso, se le notificará la resolución final.
+            </div>
+        </div>
+
+        <div class="category-title">Aspectos Legales</div>
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Hay consecuencias por presentar denuncias falsas?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Sí, presentar denuncias falsas o con información deliberadamente incorrecta puede tener consecuencias legales. Dependiendo de la gravedad, puede enfrentar sanciones administrativas o incluso penales. Por ello, es importante proporcionar información veraz y precisa en todas sus denuncias.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Mi información personal está protegida al realizar una denuncia?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Sí, toda la información personal proporcionada está protegida conforme a la Ley Federal de Protección de Datos Personales. Sus datos serán utilizados únicamente para los fines relacionados con su denuncia y no serán compartidos con terceros ajenos al proceso. Puede consultar nuestro aviso de privacidad completo en la sección correspondiente de este sitio.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                ¿Puedo cancelar una denuncia una vez presentada?
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                En ciertos casos, es posible solicitar la cancelación de una denuncia, especialmente si se trata de asuntos administrativos o civiles. Sin embargo, en casos que involucren delitos de orden público, una vez iniciado el proceso, las autoridades podrían continuar con la investigación incluso si el denunciante solicita su cancelación. Para solicitar la cancelación, debe comunicarse con nuestro centro de atención y explicar los motivos.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funcionalidad para expandir/contraer las preguntas
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                // Toggle active class
+                question.classList.toggle('active');
+                
+                // Change plus/minus icon
+                const icon = question.querySelector('.toggle-icon');
+                icon.textContent = question.classList.contains('active') ? '-' : '+';
+                
+                // Toggle answer visibility
+                const answer = question.nextElementSibling;
+                if (question.classList.contains('active')) {
+                    answer.style.display = 'block';
+                } else {
+                    answer.style.display = 'none';
+                }
+            });
+        });
+        
+        // Funcionalidad de búsqueda
+        document.getElementById('searchFaq').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Mostrar/ocultar títulos de categoría según si hay elementos visibles
+            document.querySelectorAll('.category-title').forEach(title => {
+                let nextElement = title.nextElementSibling;
+                let visibleItems = false;
+                
+                while (nextElement && !nextElement.classList.contains('category-title')) {
+                    if (nextElement.style.display !== 'none' && nextElement.classList.contains('faq-item')) {
+                        visibleItems = true;
+                        break;
+                    }
+                    nextElement = nextElement.nextElementSibling;
+                }
+                
+                title.style.display = visibleItems ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
