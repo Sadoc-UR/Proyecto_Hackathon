@@ -68,3 +68,12 @@
    ```
    git checkout origin/master -- RUTA/DEL/ARCHIVO
    ```
+
+🔹 FLUJO COMPLETO SIEMPRE QUE TRABAJES CON GIT
+Cada vez que hagas cambios en el código, sigue esta rutina:
+
+   git checkout master
+git pull origin master --rebase  # Descargar cambios antes de trabajar
+git add .
+git commit -m "Tu mensaje de commit"
+git push origin master
