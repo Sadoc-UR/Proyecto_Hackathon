@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Denuncias Ciudadanas</title>
+    <link rel="icon" href="../../IMG/LogoQ.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/YOUR-FONTAWESOME-KIT.js" crossorigin="anonymous"></script>
 
@@ -115,37 +116,35 @@
     <!-- Navbar -->
     <nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600 to-blue-800 shadow-md py-3 px-6 flex justify-between items-center text-white">
         <div class="font-bold text-xl flex items-center">
-            <img src="../IMG/LogQRO-removebg-preview.png" alt="Logo" class="h-20 mr-2"> Denuncias Ciudadanas
+            <div class="bg-white rounded-lg p-2 shadow-md">
+                <img src="../IMG/LogQRO-removebg-preview.png" alt="Logo" class="h-16 w-16 object-contain">
+            </div>
+            <span class="ml-2">Denuncias Ciudadanas</span>
         </div>
         <ul class="hidden md:flex space-x-6 items-center">
             <li>
-                <a href="#" class="hover:text-yellow-300 transition-colors flex items-center">
-                    <img src="../IMG/home.png" alt="Inicio" class="h-8 w-8 mr-2"> Inicio
+                <a href="#" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                    <img src="../IMG/home.png" alt="Inicio" class="h-8 w-8"> <span>Inicio</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="hover:text-yellow-300 transition-colors flex items-center">
-                    <img src="../IMG/group_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="Sobre Nosotros" class="h-8 w-8 mr-2"> Sobre Nosotros
+                <a href="#" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                    <img src="../IMG/group_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="Sobre Nosotros" class="h-8 w-8"> <span>Sobre Nosotros</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="hover:text-yellow-300 transition-colors flex items-center">
-                    <img src="../IMG/help_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="FAQ" class="h-8 w-8 mr-2"> FAQ
+                <a href="#" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                    <img src="../IMG/help_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="FAQ" class="h-8 w-8"> <span>FAQ</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="hover:text-yellow-300 transition-colors flex items-center">
-                    <img src="../IMG/rename.png" alt="Contacto" class="h-8 w-8 mr-2"> Contacto
+                <a href="#" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                    <img src="../IMG/rename.png" alt="Contacto" class="h-8 w-8"> <span>Contacto</span>
                 </a>
             </li>
         </ul>
-        <a href="#" class="hidden md:inline-block bg-yellow-400 text-blue-900 px-4 py-2 rounded-full font-bold shadow-md hover:bg-yellow-500 transition flex items-center">
-            <img src="../IMG/call_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="" class="h-6 w-6 mr-2"> 
-        </a>
-        <button class="md:hidden text-white text-2xl">
-            <img src="img/menu.png" alt="Menú" class="h-8 w-8">
-        </button>
     </nav>
+    
 
 
     <!-- Sección de bienvenida -->
@@ -237,7 +236,7 @@
 
                     setTimeout(() => {
                         window.location.href = category + ".html";
-                    }, 3000);
+                    }, 1000);
                 });
             });
         });
