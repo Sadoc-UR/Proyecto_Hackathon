@@ -100,32 +100,15 @@
         nav a:hover {
             text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Efecto de sombra en hover */
         }
-        .navbar-hidden {
-        padding: 5px 20px;
-        height: 60px;
-        background: rgba(0, 0, 0, 0.8);
-        }
-
-        .navbar-hidden ul,
-        .navbar-hidden a:not(.logo) {
-            display: none;
-        }
-
-        .navbar-hidden .logo img {
-            height: 50px;
-        }
 
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
-    <br>
-    <br>
-    <br>
-    <nav id="navbar" class="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600 to-blue-800 shadow-md py-3 px-6 flex justify-between items-center text-white transition-all duration-300">
-        <div class="logo font-bold text-xl flex items-center">
-            <img src="../IMG/LogQRO-removebg-preview.png" alt="Logo" class="h-20 mr-2 transition-all duration-300">
+    <nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600 to-blue-800 shadow-md py-3 px-6 flex justify-between items-center text-white">
+        <div class="font-bold text-xl flex items-center">
+            <img src="../IMG/LogQRO-removebg-preview.png" alt="Logo" class="h-20 mr-2"> Denuncias Ciudadanas
         </div>
         <ul class="hidden md:flex space-x-6 items-center">
             <li>
@@ -135,7 +118,7 @@
             </li>
             <li>
                 <a href="#" class="hover:text-yellow-300 transition-colors flex items-center">
-                    <img src="" alt="Sobre Nosotros" class="h-8 w-8 mr-2"> Sobre Nosotros
+                    <img src=" alt="Sobre Nosotros" class="h-8 w-8 mr-2"> Sobre Nosotros
                 </a>
             </li>
             <li>
@@ -152,8 +135,10 @@
         <a href="#" class="hidden md:inline-block bg-yellow-400 text-blue-900 px-4 py-2 rounded-full font-bold shadow-md hover:bg-yellow-500 transition flex items-center">
             <img src="img/report.png" alt="Denunciar" class="h-6 w-6 mr-2"> Denunciar
         </a>
+        <button class="md:hidden text-white text-2xl">
+            <img src="img/menu.png" alt="Menú" class="h-8 w-8">
+        </button>
     </nav>
-    
 
 
     <!-- Sección de bienvenida -->
@@ -235,22 +220,21 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const navbar = document.getElementById("navbar");
-            let lastScrollY = window.scrollY;
-    
-            window.addEventListener("scroll", () => {
-                if (window.scrollY > lastScrollY && window.scrollY > 50) {
-                    navbar.classList.add("navbar-hidden");
-                } else {
-                    navbar.classList.remove("navbar-hidden");
-                }
-                lastScrollY = window.scrollY;
+            const items = document.querySelectorAll(".menu-item");
+            const modal = document.getElementById("modal");
+
+            items.forEach(item => {
+                item.addEventListener("click", () => {
+                    modal.classList.add("show");
+                    const category = item.getAttribute("data-category");        
+
+                    setTimeout(() => {
+                        window.location.href = category + ".html";
+                    }, 3000);
+                });
             });
         });
     </script>
-    
 
 </body>
 </html>
-
-
