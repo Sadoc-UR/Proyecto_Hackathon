@@ -510,23 +510,23 @@
   <script>
 
     // Modify your form in the HTML file
-const form = document.querySelector('form');
-form.addEventListener('submit', async function(e) {
-  e.preventDefault();
+    const form = document.querySelector('form');
+    form.addEventListener('submit', async function(e) {
+    e.preventDefault();
  
-  // Show loading modal
-  document.getElementById('loadingModal').classList.add('show');
+    // Show loading modal
+    document.getElementById('loadingModal').classList.add('show');
  
-  // Get form data
-  const formData = {
-    name: document.getElementById('name').value,
-    date: document.getElementById('date').value,
-    incident: document.getElementById('incident').value,
-    vehicle: document.getElementById('vehicle').value,
-    witness: document.getElementById('witness').value
-  };
+    // Get form data
+    const formData = {
+        name: document.getElementById('name').value,
+        date: document.getElementById('date').value,
+        incident: document.getElementById('incident').value,
+        vehicle: document.getElementById('vehicle').value,
+        witness: document.getElementById('witness').value
+    };
  
-  try {
+    try {
     // Send data to your server
     const response = await fetch('http://localhost:3000/submit-transito', {
       method: 'POST',
