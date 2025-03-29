@@ -20,3 +20,37 @@
     
     <button type="submit">Enviar</button>
   </form>
+
+  <script>
+    const startChat = require('../gemminiConnection');
+    const { insertFormData } = require('../mongoConnection');
+
+    document.querySelector('form').addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent form submission for testing
+        const userPrompt = "Provide details for the security form"; // Customize the prompt
+        try {
+            const formData = await startChat(userPrompt);
+            document.getElementById('name').value = formData.name || '';
+            document.getElementById('location').value = formData.location || '';
+            document.getElementById('description').value = formData.description || '';
+            document.getElementById('urgency').value = formData.urgency || 'media';
+        } catch (error) {
+            console.error("Error populating the form:", error);
+        }
+
+        const formDataToSubmit = {
+            name: document.getElementById('name').value,
+            location: document.getElementById('location').value,
+            description: document.getElementById('description').value,
+            urgency: document.getElementById('urgency').value
+        };
+
+        try {
+            const result = await insertFormData("Seguridad", formDataToSubmit);
+            alert("Form data submitted successfully!");
+        } catch (error) {
+            console.error("Error submitting form data:", error);
+            alert("Failed to submit form data.");
+        }
+    });
+</script>

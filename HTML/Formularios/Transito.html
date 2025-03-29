@@ -16,3 +16,39 @@
     
     <button type="submit">Enviar</button>
   </form>
+
+  <script>
+    const startChat = require('../gemminiConnection');
+    const { insertFormData } = require('../mongoConnection');
+
+    document.querySelector('form').addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent form submission for testing
+        const userPrompt = "Provide details for the traffic form"; // Customize the prompt
+        try {
+            const formData = await startChat(userPrompt);
+            document.getElementById('name').value = formData.name || '';
+            document.getElementById('date').value = formData.date || '';
+            document.getElementById('incident').value = formData.incident || '';
+            document.getElementById('vehicle').value = formData.vehicle || '';
+            document.getElementById('witness').value = formData.witness || '';
+        } catch (error) {
+            console.error("Error populating the form:", error);
+        }
+
+        const formDataToSubmit = {
+            name: document.getElementById('name').value,
+            date: document.getElementById('date').value,
+            incident: document.getElementById('incident').value,
+            vehicle: document.getElementById('vehicle').value,
+            witness: document.getElementById('witness').value
+        };
+
+        try {
+            const result = await insertFormData("Transito", formDataToSubmit);
+            alert("Form data submitted successfully!");
+        } catch (error) {
+            console.error("Error submitting form data:", error);
+            alert("Failed to submit form data.");
+        }
+    });
+</script>

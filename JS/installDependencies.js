@@ -1,6 +1,10 @@
 /**
  * This file automates the installation of required dependencies for the project.
  * 
+ * Changes:
+ * - Added a script to install the `mongodb` package using the `exec` function.
+ * - Included error handling to display installation errors or success messages.
+ * 
  * Usage:
  * 1. Run this file using Node.js: `node installDependencies.js`.
  * 2. It installs the `mongodb` package required for MongoDB operations.
