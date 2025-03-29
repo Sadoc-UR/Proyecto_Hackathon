@@ -1,29 +1,285 @@
-<form action="/submit-transito" method="post">
-    <label for="name">Nombre completo:</label>
-    <input type="text" id="name" name="name" required><br>
-    
-    <label for="date">Fecha y hora:</label>
-    <input type="datetime-local" id="date" name="date" required><br>
-    
-    <label for="incident">Descripción del incidente:</label>
-    <textarea id="incident" name="incident" required></textarea><br>
-    
-    <label for="vehicle">Tipo de vehículo involucrado:</label>
-    <input type="text" id="vehicle" name="vehicle"><br>
-    
-    <label for="witness">Testigos:</label>
-    <input type="text" id="witness" name="witness"><br>
-    
-    <button type="submit">Enviar</button>
-  </form>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../../IMG/LogoQ.png">
+  <title>Reporte de Tránsito</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #a1caff, #1677d1);
+        color: white;
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+    }
 
+    .menu-container {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 600px;
+        color: #1677d1;
+        margin-top: 20px;
+    }
+
+    .menu-item {
+        font-size: 16px;
+        border-radius: 25px;
+        padding: 12px;
+        width: 100%;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: white;
+        border: none;
+        margin-bottom: 15px;
+    }
+
+    .menu-item:hover {
+        transform: scale(1.05);
+        filter: brightness(1.2);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.5);
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.3s;
+    }
+
+    .modal.show {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .modal-content {
+        background: #2C3E50;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        width: 80%;
+        max-width: 350px;
+        color: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 15px auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    nav a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        margin: 0 5px;
+    }
+
+    nav a:hover {
+        text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #1677d1;
+        font-weight: bold;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        background-color: white;
+        color: #333;
+        font-size: 16px;
+        transition: all 0.3s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: #1677d1;
+        box-shadow: 0 0 0 3px rgba(22, 119, 209, 0.2);
+        outline: none;
+    }
+
+    textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .btn-submit {
+        background-color: #1677d1;
+        color: white;
+        border: none;
+        padding: 14px 24px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: block;
+        width: 100%;
+        text-transform: uppercase;
+        margin-top: 20px;
+    }
+
+    .btn-submit:hover {
+        transform: scale(1.05);
+        filter: brightness(1.2);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+        color: #1677d1;
+        font-size: 24px;
+        margin-bottom: 25px;
+        font-weight: bold;
+    }
+
+    .circle-menu {
+        background: linear-gradient(to right, #1e88e5, #1565c0);
+        padding: 10px;
+        border-radius: 0;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: none;
+        color: #1677d1;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .circle-item {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: bold;
+        font-size: 16px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0 10px;
+        padding: 10px 15px;
+        border-radius: 0;
+        border: none;
+    }
+
+    .circle-item:hover {
+        background-color: rgba(13, 56, 96, 0.2);
+        transform: none;
+        box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="circle-menu bg-gradient-to-r from-blue-600 to-blue-800">
+    <img src="../../IMG/LogQRO-removebg-preview.png" alt="Logo" class="circle-item" style="width: 110px; height: auto;">
+    <div class="circle-item" style="display: flex; align-items: center; gap: 5px;">
+        <img src="../../IMG/home.png" alt="Inicio" style="width: 20px; height: auto;">
+        <span>Inicio</span>
+    </div>
+    <div class="circle-item" style="display: flex; align-items: center; gap: 5px;">
+        <img src="../../IMG/group_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="Inicio" style="width: 20px; height: auto;">
+        <span>Sobre Nosotros</span>
+    </div>
+    <div class="circle-item" style="display: flex; align-items: center; gap: 5px;">
+        <img src="../../IMG/help_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="Inicio" style="width: 20px; height: auto;">
+        <span>FAQ</span>
+    </div>
+    <div class="circle-item" style="display: flex; align-items: center; gap: 5px;">
+        <img src="../../IMG/rename.png" alt="Inicio" style="width: 20px; height: auto;">
+        <span>Contacto</span>
+    </div>
+  </div>
+
+  <div class="menu-container">
+    <h1>Reporte de Tránsito</h1>
+    <form action="/submit-transito" method="post">
+      <div class="form-group">
+        <label for="name">Nombre completo:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="date">Fecha y hora:</label>
+        <input type="datetime-local" id="date" name="date" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="incident">Descripción del incidente:</label>
+        <textarea id="incident" name="incident" required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="vehicle">Tipo de vehículo involucrado:</label>
+        <input type="text" id="vehicle" name="vehicle">
+      </div>
+      
+      <div class="form-group">
+        <label for="witness">Testigos:</label>
+        <input type="text" id="witness" name="witness">
+      </div>
+      
+      <button type="submit" class="btn-submit">Enviar Reporte</button>
+    </form>
+  </div>
+
+  <div id="loadingModal" class="modal">
+    <div class="modal-content">
+        <h2>Procesando su solicitud</h2>
+        <div class="spinner"></div>
+        <p>Por favor espere...</p>
+    </div>
+  </div>
+  
   <script>
     const startChat = require('../gemminiConnection');
     const { insertFormData } = require('../mongoConnection');
 
     document.querySelector('form').addEventListener('submit', async (event) => {
-        event.preventDefault(); // Prevent form submission for testing
-        const userPrompt = "Provide details for the traffic form"; // Customize the prompt
+        event.preventDefault();
+        document.getElementById('loadingModal').classList.add('show');
+        const userPrompt = "Provide details for the traffic form";
+        
         try {
             const formData = await startChat(userPrompt);
             document.getElementById('name').value = formData.name || '';
@@ -45,10 +301,14 @@
 
         try {
             const result = await insertFormData("Transito", formDataToSubmit);
+            document.getElementById('loadingModal').classList.remove('show');
             alert("Form data submitted successfully!");
         } catch (error) {
             console.error("Error submitting form data:", error);
+            document.getElementById('loadingModal').classList.remove('show');
             alert("Failed to submit form data.");
         }
     });
-</script>
+  </script>
+</body>
+</html>
