@@ -308,7 +308,7 @@
         </div>
     </div>
 </footer>
-  
+    
   <script>
     const startChat = require('../gemminiConnection');
     const { insertFormData } = require('../mongoConnection');
@@ -333,7 +333,7 @@
             location: document.getElementById('location').value,
             description: document.getElementById('description').value,
             urgency: document.getElementById('urgency').value
-        };
+        };  
 
         try {
             const result = await insertFormData("Seguridad", formDataToSubmit);
