@@ -15,7 +15,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #a1caff, #1677d1);
+            background: linear-gradient(135deg, #a1caff, #2070bb);
             color: white;
             font-family: 'Arial', sans-serif;
             text-align: center;
@@ -114,12 +114,12 @@
     <br>
     <br>
     <!-- Navbar -->
-    <nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600 to-blue-800 shadow-md py-3 px-6 flex justify-between items-center text-white">
+    <nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-sky-400 to-blue-600 shadow-md py-3 px-6 flex justify-between items-center text-white">
         <div class="font-bold text-xl flex items-center">
-            <div class="bg-white rounded-lg p-2 shadow-md">
+            <div class="">
                 <img src="../IMG/LogQRO-removebg-preview.png" alt="Logo" class="h-20 w-15 object-contain">
             </div>
-            <span class="ml-20">Denuncias Ciudadanas</span>
+            <span class="ml-20 text-lg">Denuncias Ciudadanas</span>
         </div>
         <ul class="hidden md:flex space-x-6 items-center">
             <li>
@@ -191,19 +191,19 @@
     </div>
 
     <!-- Footer -->
-    <footer class="w-full bg-blue-900 text-white py-8 mt-12 text-center">
+    <footer class="w-full bg-gradient-to-r from-sky-400 to-blue-600 text-white py-8 mt-12 text-center">
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap justify-center gap-8 mb-6">
                 <div>
-                    <h4 class="font-bold text-lg mb-2"><i class="fas fa-map-marker-alt"></i> Dirección</h4>
+                    <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-map-marker-alt"></i> Dirección</h4>
                     <p class="text-gray-300">Av. Ciudadana #123, Ciudad, País</p>
                 </div>
                 <div>
-                    <h4 class="font-bold text-lg mb-2"><i class="fas fa-envelope"></i> Contacto</h4>
+                    <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-envelope"></i> Contacto</h4>
                     <p class="text-gray-300">soporte@denunciasciudadanas.com</p>
                 </div>
                 <div>
-                    <h4 class="font-bold text-lg mb-2"><i class="fas fa-phone"></i> Teléfono</h4>
+                    <h4 class="font-bold text-lg mb-2 text-black"><i class="fas fa-phone"></i> Teléfono</h4>
                     <p class="text-gray-300">+123 456 7890</p>
                 </div>
             </div>
@@ -217,13 +217,14 @@
                     <a href="#" class="text-gray-400 hover:text-yellow-300 transition"><i class="fab fa-linkedin-in text-xl"></i></a>
                 </div>
                 <div class="mt-4">
-                    <a href="#" class="text-gray-400 hover:text-yellow-300 transition text-sm"><i class="fas fa-file-contract"></i> Términos y Condiciones</a> |
-                    <a href="#" class="text-gray-400 hover:text-yellow-300 transition text-sm"><i class="fas fa-user-shield"></i> Política de Privacidad</a>
+                    <a href="#" class="text-black hover:text-yellow-300 transition text-sm"><i class="fas fa-file-contract"></i> Términos y Condiciones</a> |
+                    <a href="#" class="text-black hover:text-yellow-300 transition text-sm"><i class="fas fa-user-shield"></i> Política de Privacidad</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const items = document.querySelectorAll(".menu-item");
