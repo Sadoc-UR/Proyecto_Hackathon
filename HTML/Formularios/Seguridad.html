@@ -161,7 +161,7 @@
             </div>
             <ul class="hidden md:flex space-x-6 items-center">
                 <li>
-                    <a href="/index.html" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
+                    <a href="../Index.html" class="inline-flex items-center px-4 py-2 gap-2 hover:bg-yellow-400 hover:text-blue-900 rounded-lg transition-all focus:outline-none">
                         <img src="../../../IMG/home.png" alt="Inicio" class="h-8 w-8"> <span>Inicio</span>
                     </a>
                 </li>
@@ -281,7 +281,7 @@
             // Categorías de emergencias con palabras clave mejoradas
             const emergencies = {
                 "general": ["ayuda", "socorro", "emergencia", "auxilio", "urgencia"],
-                "ambulancia": ["desmayo", "sangre", "dolor", "ataque", "paro", "ahogo", "intoxicación", "electrocución", "muerte", "muerto"],
+                "ambulancia": ["ambulancia", "patrulla", "desmayo", "sangre", "dolor", "ataque", "paro", "ahogo", "intoxicación", "electrocución", "muerte", "muerto"],
                 "bomberos": ["incendio", "humo", "quemar", "explosión", "fuego"],
                 "policía": ["asalto", "robo", "violencia", "arma", "armas", "disparo", "balacera", "secuestro", "amenaza", "crimen", "terrorismo", "bomba", "narcotráfico"]
             };
@@ -321,7 +321,9 @@
                 "urgncia": "urgencia",
                 "intoxicasion": "intoxicación",
                 "elektrocucion": "electrocución",
-                "muerrte": "muerte", "muertte": "muerte"
+                "muerrte": "muerte", "muertte": "muerte",
+                "patrula": "patrulla", "patrlla": "patrulla",
+                "policia": "policía", "bomveros": "bomberos"
             };
     
             for (const [wrong, correct] of Object.entries(corrections)) {
@@ -376,5 +378,6 @@
             chatBody.appendChild(botDiv);
         }, 1000);
     </script>
+    
 </body>
 </html>
